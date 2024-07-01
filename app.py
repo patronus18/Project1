@@ -1,4 +1,3 @@
-pip instal flask
 from flask import Flask, request, render_template, redirect, url_for, flash
 import pandas as pd
 import os

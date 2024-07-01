@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Predict Flammability</title>
+</head>
+<body>
+    <h1>Predict Flammability</h1>
+    <form method="post">
+        <label>Material Name: <input type="text" name="material_name"></label><br>
+        <label>Flammability Class: <input type="text" name="flammability_class"></label><br>
+        <button type="submit">Predict</button>
+    </form>
+    <h2>{{ prediction }}</h2>
+    <br><br>
+    <a href="/">Back to Home</a>
+</body>
+</html>

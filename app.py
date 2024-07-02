@@ -1,19 +1,15 @@
-from flask import Flask, request, render_template, redirect, url_for, flash
+from flask import Flask, render_template, request, redirect, url_for, flash
 import pandas as pd
 import os
-import logging
-import io
 
-
-
-logging.basicConfig(level=logging.INFO)
-
+# Initialize Flask app
 app = Flask(__name__)
-app.secret_key = 'supersecretkey'  # Needed for flash messages
+
+# Secret key for session management
+app.secret_key = 'supersecretkey'
 
 # Path to your CSV file
-csv_file_path = 'sample data.csv'  # Avoid spaces in file names
-
+csv_file_path = 'sample_data.csv'
 
 # Load or initialize the DataFrame
 if os.path.exists(csv_file_path):
@@ -80,5 +76,3 @@ def predict_flammability():
 # Run the Flask app
 if __name__ == '__main__':
     app.run(debug=True)
-
-

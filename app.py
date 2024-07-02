@@ -7,7 +7,7 @@ app = Flask(__name__)
 app.secret_key = 'supersecretkey'  # Needed for flash messages
 
 # Path to your CSV file
-csv_file_path = 'sample_data.csv'
+csv_file_path = 'sample data .csv'
 
 # Load or initialize the DataFrame
 if os.path.exists(csv_file_path):

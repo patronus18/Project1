@@ -10,7 +10,7 @@ app = Flask(__name__)
 app.secret_key = 'supersecretkey'  # Needed for flash messages
 
 # Path to your CSV file
-csv_file_path = 'sample_data.csv'  # Avoid spaces in file names
+csv_file_path = 'sample data.csv'  # Avoid spaces in file names
 
 # Load or initialize the DataFrame
 try:

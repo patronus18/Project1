@@ -5,7 +5,11 @@ import os
 app = Flask(__name__)
 app.secret_key = 'supersecretkey'
 
-csv_file_path = 'sample_data.csv'
+# Adjust the path to templates folder
+template_dir = os.path.abspath('./templates')
+app.template_folder = template_dir
+
+csv_file_path = 'sample data.csv'
 
 # Initialize or load DataFrame
 if os.path.exists(csv_file_path):

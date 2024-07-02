@@ -2,6 +2,10 @@ from flask import Flask, request, render_template, redirect, url_for, flash
 import pandas as pd
 import os
 import io
+import logging
+
+# Configure logging
+logging.basicConfig(level=logging.INFO)
 
 app = Flask(__name__)
 app.secret_key = 'supersecretkey'  # Needed for flash messages

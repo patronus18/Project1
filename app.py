@@ -1,6 +1,11 @@
 from flask import Flask, render_template, request, redirect, url_for, flash
 import pandas as pd
 import os
+import logging
+
+# Configure logging
+logging.basicConfig(level=logging.INFO)
+
 
 app = Flask(__name__)
 app.secret_key = 'supersecretkey'

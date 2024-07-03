@@ -11,10 +11,11 @@ app = Flask(__name__)
 app.secret_key = 'supersecretkey'
 
 # Ensure templates folder is correctly set
-app.template_folder = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'templates')
+app.template_folder = os.path.join(os.path.dirname(os.path.abspath('app.py')), 'templates')
 
-csv_file_path = 'sample data.csv'
+csv_file_path = os.path.join(os.path.dirname(os.path.abspath('app.py')), 'sample data.csv')
 
+# Initialize or load DataFrame
 try:
     if os.path.exists(csv_file_path):
         df = pd.read_csv(csv_file_path, encoding='latin1')
@@ -25,6 +26,7 @@ try:
 except Exception as e:
     logger.error(f"Error reading CSV file: {e}", exc_info=True)
     raise
+
 
 @app.route('/')
 def home():

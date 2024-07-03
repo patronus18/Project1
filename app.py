@@ -11,7 +11,7 @@ app = Flask(__name__)
 app.secret_key = 'supersecretkey'
 
 # Ensure templates folder is correctly set
-app.template_folder = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'templates')
+app.template_folder = os.path.join(os.path.dirname(os.path.abspath('app.py')), 'templates')
 
 csv_file_path = 'sample data.csv'
 

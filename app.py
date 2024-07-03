@@ -11,27 +11,28 @@ app = Flask(__name__)
 app.secret_key = 'supersecretkey'
 
 # Ensure templates folder is correctly set
-app.template_folder = os.path.join(os.path.dirname(os.path.abspath('app.py')), 'templates')
+app.template_folder = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'templates')
 
 csv_file_path = 'sample data.csv'
 
 # Initialize or load DataFrame
 if os.path.exists(csv_file_path):
     df = pd.read_csv(csv_file_path, encoding='latin1')
-         logger.info("this function done")
+    logger.info("CSV file loaded successfully")
 else:
     df = pd.DataFrame(columns=[
         'material_name', 'material_type', 'thickness', 'density', 'flammability_rating',
         'ignition_temp', 'burn_time', 'heat_release_rate', 'smoke_production',
         'toxicity', 'regulations', 'use_case', 'manufacturer', 'flammability_class', 'pass_fail'
     ])
+    logger.info("New DataFrame initialized")
 
 @app.route('/')
 def home():
     try:
-         table_html = df.to_html(classes='data', header="true") # Generate a single HTML string
+        table_html = df.to_html(classes='data', header="true")  # Generate a single HTML string
         logger.info("Rendering index.html with data table")
-        return render_template('index.html')  # Pass the table HTML to the template
+        return render_template('index.html', table_html=table_html)  # Pass the table HTML to the template
     except Exception as e:
         logger.error(f"Error rendering home template: {e}", exc_info=True)
         return "An error occurred while rendering the home page.", 500

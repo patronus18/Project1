@@ -83,10 +83,9 @@ def predict_flammability():
     if request.method == 'POST':
       material_name = request.form['material_name']
       result = "Pass" if request.form['flammability_class'] == 'Low' else "Fail"
-
-            return render_template('predict.html', prediction=result)
-        return render_template('predict.html')
-    except Exception as e:
+      return render_template('predict.html', prediction=result)
+    return render_template('predict.html')
+  except Exception as e:
         app.logger.error(f"Error predicting flammability: {e}")
         return "An error occurred while predicting flammability.", 500
 

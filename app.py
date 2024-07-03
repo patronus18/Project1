@@ -13,7 +13,7 @@ app.secret_key = 'supersecretkey'
 # Ensure templates folder is correctly set
 app.template_folder = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'templates')
 
-csv_file_path = 'sample data.csv'
+csv_file_path = 'C:\Users\E40085777\flammability_project\sample data.csv'
 
 # Initialize or load DataFrame
 if os.path.exists(csv_file_path):

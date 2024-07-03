@@ -82,7 +82,7 @@ def predict_flammability():
   try:
     if request.method == 'POST':
       material_name = request.form['material_name']
-      result = "Pass" if request.form['flammability_class'] == 'Low' else "Fail
+      result = "Pass" if request.form['flammability_class'] == 'Low' else "Fail"
 
             return render_template('predict.html', prediction=result)
         return render_template('predict.html')

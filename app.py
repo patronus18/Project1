@@ -26,7 +26,7 @@ else:
     'toxicity', 'regulations', 'use_case', 'manufacturer', 'flammability_class', 'pass_fail'
   ])
 
-@app.route('/')
+@app.route('/index')
 def index():
   try:
     table_html = df.to_html(classes='data', header="true")  # Generate a single HTML string

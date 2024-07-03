@@ -9,12 +9,8 @@ logging.basicConfig(level=logging.INFO)
 app = Flask(__name__)
 app.secret_key = 'supersecretkey'
 
-
-
-# Set the path to the templates directory
-template_dir = os.path.abspath('./templates')
-app.template_folder = template_dir
-app.config['TEMPLATES_AUTO_RELOAD'] = True
+# Ensure templates folder is correctly set
+app.template_folder = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'templates')
 
 csv_file_path = 'sample data.csv'
 
@@ -31,8 +27,8 @@ else:
 @app.route('/')
 def home():
     try:
-        table_html = df.to_html(classes='data', header="true")
-        return render_template('index.html', table_html=table_html)
+        table_html = df.to_html(classes='data', header="true")  # Generate a single HTML string
+        return render_template('index.html', table_html=table_html)  # Pass the table HTML to the template
     except Exception as e:
         app.logger.error(f"Error rendering home template: {e}")
         return "An error occurred while rendering the home page.", 500
@@ -94,4 +90,5 @@ def predict_flammability():
 
 if __name__ == '__main__':
     app.run(debug=True)
+
 

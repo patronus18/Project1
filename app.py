@@ -18,21 +18,22 @@ csv_file_path = 'sample data.csv'
 
 # Initialize or load DataFrame
 if os.path.exists(csv_file_path):
-    df = pd.read_csv(csv_file_path, encoding='latin1')
+  df = pd.read_csv(csv_file_path, encoding='latin1')
 else:
-    df = pd.DataFrame(columns=[
-        'material_name', 'material_type', 'thickness', 'density', 'flammability_rating',
-        'ignition_temp', 'burn_time', 'heat_release_rate', 'smoke_production',
-        'toxicity', 'regulations', 'use_case', 'manufacturer', 'flammability_class', 'pass_fail'
-    ])
+  df = pd.DataFrame(columns=[
+    'material_name', 'material_type', 'thickness', 'density', 'flammability_rating',
+    'ignition_temp', 'burn_time', 'heat_release_rate', 'smoke_production',
+    'toxicity', 'regulations', 'use_case', 'manufacturer', 'flammability_class', 'pass_fail'
+  ])
 
 @app.route('/')
 def home():
-    try:
-        return render_template('index.html', tables=[df.to_html(classes='data', header="true")])
-    except Exception as e:
-        app.logger.error(f"Error rendering home template: {e}")
-        return "An error occurred while rendering the home page.", 500
+  try:
+    table_html = df.to_html(classes='data', header="true")  # Generate a single HTML string
+    return render_template('index.html', table_html=table_html)
+  except Exception as e:
+    app.logger.error(f"Error rendering home template: {e}")
+    return "An error occurred while rendering the home page.", 500
 
 @app.route('/search', methods=['GET', 'POST'])
 def search():

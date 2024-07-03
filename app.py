@@ -11,7 +11,8 @@ app = Flask(__name__)
 app.secret_key = 'supersecretkey'
 
 # Adjust the path to the directory containing your HTML files
-html_dir = os.path.join(os.path.dirname(__file__), 'C:\Users\E40085777\flammability_project\templates')
+html_dir = r'C:\Users\E40085777\flammability_project\templates'
+
 
 csv_file_path = 'sample data.csv'
 

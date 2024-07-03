@@ -10,9 +10,11 @@ logging.basicConfig(level=logging.INFO)
 app = Flask(__name__)
 app.secret_key = 'supersecretkey'
 
-# Adjust the path to templates folder
-template_dir = os.path.abspath('./templates')
+
+# Adjust the path to the directory containing your HTML files
+template_dir = os.path.join(os.path.dirname(__file__), 'index.html')
 app.template_folder = template_dir
+
 
 csv_file_path = 'sample data.csv'
 

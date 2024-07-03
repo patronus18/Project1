@@ -11,9 +11,9 @@ app = Flask(__name__)
 app.secret_key = 'supersecretkey'
 
 # Ensure templates folder is correctly set
-app.template_folder = os.path.join(os.path.dirname(os.path.abspath('app.py')), 'templates')
+app.template_folder = os.path.join(os.path.dirname(os.path.abspath('flammability_project')), 'templates')
 
-csv_file_path = os.path.join(os.path.dirname(os.path.abspath('app.py')), 'sample data.csv')
+csv_file_path = os.path.join(os.path.dirname(os.path.abspath('flammability_project')), 'sample data.csv')
 
 # Initialize or load DataFrame
 try:

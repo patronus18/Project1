@@ -13,19 +13,18 @@ app.secret_key = 'supersecretkey'
 # Ensure templates folder is correctly set
 app.template_folder = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'templates')
 
-csv_file_path = 'C:\Users\E40085777\flammability_project\sample data.csv'
+csv_file_path = 'sample data.csv'
 
-# Initialize or load DataFrame
-if os.path.exists(csv_file_path):
-    df = pd.read_csv(csv_file_path, encoding='latin1')
-    logger.info("CSV file loaded successfully")
-else:
-    df = pd.DataFrame(columns=[
-        'material_name', 'material_type', 'thickness', 'density', 'flammability_rating',
-        'ignition_temp', 'burn_time', 'heat_release_rate', 'smoke_production',
-        'toxicity', 'regulations', 'use_case', 'manufacturer', 'flammability_class', 'pass_fail'
-    ])
-    logger.info("New DataFrame initialized")
+try:
+    if os.path.exists(csv_file_path):
+        df = pd.read_csv(csv_file_path, encoding='latin1')
+        logger.info("CSV file loaded successfully")
+    else:
+        logger.error(f"CSV file {csv_file_path} does not exist.")
+        raise FileNotFoundError(f"CSV file {csv_file_path} does not exist.")
+except Exception as e:
+    logger.error(f"Error reading CSV file: {e}", exc_info=True)
+    raise
 
 @app.route('/')
 def home():

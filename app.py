@@ -11,7 +11,7 @@ app = Flask(__name__)
 app.secret_key = 'supersecretkey'
 
 # Adjust the path to the directory containing your HTML files
-html_dir = os.path.join(os.path.dirname(__file__), 'html_files')
+html_dir = os.path.join(os.path.dirname(__file__), 'templates')
 
 csv_file_path = 'sample data.csv'
 
@@ -40,14 +40,14 @@ def search():
     if request.method == 'POST':
       query = request.form['query']
       filtered_df = df[df.apply(lambda row: row.astype(str).str.contains(query, case=False).any(), axis=1)]
-      return render_template('search_results.html', tables=[filtered_df.to_html(classes='data', header="true")])
+      return render_template('search.html', tables=[filtered_df.to_html(classes='data', header="true")])
     return render_template('search.html')
   except Exception as e:
     app.logger.error(f"Error processing search request: {e}")
     return "An error occurred while processing the search request.", 500
 
-@app.route('/add', methods=['GET', 'POST'])
-def add_entry():
+@app.route('/add_edit', methods=['GET', 'POST'])
+def add_edit():
   try:
     if request.method == 'POST':
       new_entry = {

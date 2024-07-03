@@ -30,7 +30,7 @@ def home():
     # Function logic for the home page
     return render_template('index.html')  # Assuming the home page template is 'index.html'
 
-@app.route('/index')
+@app.route('/index',methods=['GET', 'POST'])
 def index():
   try:
     table_html = df.to_html(classes='data', header="true")  # Generate a single HTML string

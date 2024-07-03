@@ -27,7 +27,7 @@ else:
   ])
 
 @app.route('/')
-def home():
+def index():
   try:
     table_html = df.to_html(classes='data', header="true")  # Generate a single HTML string
     return render_template('index.html', table_html=table_html)  # Assuming render_template still works

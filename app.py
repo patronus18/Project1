@@ -25,6 +25,10 @@ else:
     'ignition_temp', 'burn_time', 'heat_release_rate', 'smoke_production',
     'toxicity', 'regulations', 'use_case', 'manufacturer', 'flammability_class', 'pass_fail'
   ])
+@app.route('/')
+def home():
+    # Function logic for the home page
+    return render_template('index.html')  # Assuming the home page template is 'index.html'
 
 @app.route('/index')
 def index():

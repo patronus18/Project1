@@ -5,6 +5,7 @@ import logging
 
 # Configure logging
 logging.basicConfig(level=logging.INFO)
+logger = logging.getLogger(__name__)
 
 app = Flask(__name__)
 app.secret_key = 'supersecretkey'
@@ -28,9 +29,10 @@ else:
 def home():
     try:
         table_html = df.to_html(classes='data', header="true")  # Generate a single HTML string
+        logger.info("Rendering index.html with data table")
         return render_template('index.html', table_html=table_html)  # Pass the table HTML to the template
     except Exception as e:
-        app.logger.error(f"Error rendering home template: {e}")
+        logger.error(f"Error rendering home template: {e}", exc_info=True)
         return "An error occurred while rendering the home page.", 500
 
 @app.route('/search', methods=['GET', 'POST'])
@@ -39,10 +41,11 @@ def search():
         if request.method == 'POST':
             query = request.form['query']
             filtered_df = df[df.apply(lambda row: row.astype(str).str.contains(query, case=False).any(), axis=1)]
+            logger.info("Rendering search.html with search results")
             return render_template('search.html', tables=[filtered_df.to_html(classes='data', header="true")])
         return render_template('search.html')
     except Exception as e:
-        app.logger.error(f"Error processing search request: {e}")
+        logger.error(f"Error processing search request: {e}", exc_info=True)
         return "An error occurred while processing the search request.", 500
 
 @app.route('/add_edit', methods=['GET', 'POST'])
@@ -70,10 +73,11 @@ def add_edit():
             df = pd.concat([df, pd.DataFrame([new_entry])], ignore_index=True)
             df.to_csv(csv_file_path, index=False, encoding='latin1')
             flash('New entry added successfully!')
+            logger.info("New entry added and saved to CSV")
             return redirect(url_for('home'))
         return render_template('add_edit.html')
     except Exception as e:
-        app.logger.error(f"Error adding new entry: {e}")
+        logger.error(f"Error adding new entry: {e}", exc_info=True)
         return "An error occurred while adding a new entry.", 500
 
 @app.route('/predict', methods=['GET', 'POST'])
@@ -82,13 +86,12 @@ def predict_flammability():
         if request.method == 'POST':
             material_name = request.form['material_name']
             result = "Pass" if request.form['flammability_class'] == 'Low' else "Fail"
+            logger.info(f"Prediction result for {material_name}: {result}")
             return render_template('predict.html', prediction=result)
         return render_template('predict.html')
     except Exception as e:
-        app.logger.error(f"Error predicting flammability: {e}")
+        logger.error(f"Error predicting flammability: {e}", exc_info=True)
         return "An error occurred while predicting flammability.", 500
 
 if __name__ == '__main__':
     app.run(debug=True)
-
-

@@ -30,7 +30,7 @@ def home():
     try:
         table_html = df.to_html(classes='data', header="true")  # Generate a single HTML string
         logger.info("Rendering index.html with data table")
-        return render_template('index.html', table_html=table_html)  # Pass the table HTML to the template
+        return render_template('index.html')  # Pass the table HTML to the template
     except Exception as e:
         logger.error(f"Error rendering home template: {e}", exc_info=True)
         return "An error occurred while rendering the home page.", 500
